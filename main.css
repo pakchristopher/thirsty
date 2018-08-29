@@ -1,0 +1,83 @@
+*,*::before,*::after{ margin:0; padding:0; box-sizing:inherit; }
+html{ box-sizing:border-box; }
+a,a:visited{ text-decoration:none; color:inherit; }
+ul{list-style-type:none;}
+
+.wrap{
+    width:100%; min-height:100vh;
+    background-image:
+        linear-gradient(rgba(126, 42, 103, 0.85),rgba(55,55,95,.85)),
+        url(images/ct.jpg);
+    color:rgb(235,235,235);
+    text-align:center;
+}
+.wrap h1{
+    font-family:'Pacifico',cursive; font-size:4.5rem; line-height:1.25; letter-spacing:4px;
+    color:rgba(255,255,255,.6);
+}
+.neon{text-shadow:0 0 2px pink,0 0 5px pink,0 0 15px pink;}
+.wrap__form{margin-top:2rem;}
+.wrap__result{
+    width:100%;
+    margin:0 auto;
+    font-size:0;
+    padding:3rem 2rem;
+
+    grid-template-columns:repeat(4,1fr);
+    grid-gap:1.25rem;
+}
+.wrap__result > *{font-size:1rem;font-family: 'Ubuntu Condensed', sans-serif;}
+.wrap__form-input{}
+.wrap__form-input > *{ display:block; white-space:nowrap; margin:0 auto; }
+.wrap__form__alert{}
+.wrap__form__result{
+    display:none;
+}
+.wrap__form-catagories{margin-top:2rem;}
+.wrap__form-catagories > *{ display:block; white-space:nowrap; margin:0 auto; }
+label[for]{font-family:'Permanent Marker',cursive; font-size:2rem;letter-spacing:2px;}
+
+nav{
+    color:rgb(235,235,235);
+    position:fixed;
+    top:1rem; right:1rem;
+}
+nav a{color:inherit; text-decoration:none;}
+
+.query-result{
+    padding:1.75rem 1.5rem;
+    border:3px solid white;
+    border-radius:7px;
+    background-color:rgba(235,235,235,.3);
+}
+.query-result img{width:100%;}
+
+.danger{color:rgb(185, 30, 30);}
+
+.modal{
+    display:none;
+    
+}
+
+
+.favorites-content{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-gap:1.25rem;
+}
+.favorites-content__drink{
+    /* display:inline-block;
+    width:25%; */
+}
+.favorites-content__drink img{width:100%;}
+
+.instr,.ingre{
+    display:inline-block;
+    margin:10px 0 5px 0;
+    border-bottom:2px solid white;
+}
+.query-result__name{margin:3px;}
+.query-result__badge{margin:3px 0 10px 0;}
+.query-result__img{border:3px solid white;}
+.query-result__instructions{line-height:1.25;}
+.query-result__ingredients li{margin:3px;}
