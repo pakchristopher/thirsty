@@ -1,7 +1,7 @@
 class UI{
     printAlert(message, classname){
         document.querySelector('.wrap__alert').innerHTML = `
-        <h3 class="${classname}">${message}</h3>
+            <h3 class="${classname}">${message}</h3>
         `
         setTimeout(()=>{
             document.querySelector('.danger').remove()
@@ -51,7 +51,6 @@ class UI{
                 ingredients.push(ingredientMeasure)
             }
         }
-        // console.log(ingredients)
         let ingredMeas = ''
         ingredients.forEach(ingred=>{
             ingredMeas += `<li>${ingred.ingredient} &mdash; ${ingred.measure}</li>`;
@@ -88,14 +87,12 @@ class UI{
     displayCategories(){
         const categoryList = cocktail.getCategories()
         .then(cate=>{
-            console.log(cate.drinks)
             const list = cate.drinks
             const first = document.createElement('option')
             first.value = ''
             first.textContent = '-- Select --'
             document.getElementById('search-category').appendChild(first)
             list.forEach(cat=>{
-                console.log(cat)
                 const option = document.createElement('option')
                 option.textContent = cat.strCategory
                 option.value = cat.strCategory.split(' ').join('_');
@@ -111,7 +108,7 @@ class UI{
             div.innerHTML = `
                 <h2>${fav.name}</h2>
                 <img src="${fav.image}">
-                <a href="#" class="get-recipe" data-toggle="modal" data-id="${fav.id}">View</a>
+                <a href="#" class="get-recipe fav-view" data-toggle="modal" data-id="${fav.id}">View</a>
                 <a href="#" class="remove-recipe" data-toggle="modal" data-id="${fav.id}">Remove</a>
             `;
             favsContent.appendChild(div)
@@ -127,7 +124,8 @@ class UI{
             const favDrink = document.querySelector(`[data-id="${id}"]`)
             if(favDrink){
                 favDrink.classList.add('favorite')
-                favDrink.textContent = '-'
+                favDrink.textContent = `‒`
+                favDrink.style.backgroundColor = 'rgb(235, 105, 125)'
             }
         })
     }
@@ -180,9 +178,6 @@ class CocktailDB{
     }
 }
 
-// import UI from './js/ui';
-// import Cocktail from './js/cocktail';
-
 const ui = new UI()
 const cocktail = new Cocktail()
 const cocktaildb = new CocktailDB()
@@ -217,13 +212,11 @@ function docReady(){
             if(e.target.classList.contains('get-recipe')){
                 cocktail.getRecipe(e.target.dataset.id)
                 .then(recipe => {
-                    console.log(recipe.drinks[0])
                     ui.displayRecipe(recipe.drinks[0])
                 })
             }
             if (e.target.classList.contains('remove-recipe')){
                 ui.removeFavorite(e.target.parentElement)
-                // console.log(e.target.parentElement)
                 cocktaildb.removeFromDB(e.target.dataset.id)
             }
         })
@@ -267,26 +260,25 @@ function resultDelegation(e){
     if(e.target.classList.contains('get-recipe')){
         cocktail.getRecipe(e.target.dataset.id)
         .then(recipe=>{
-            console.log(recipe.drinks[0])
             ui.displayRecipe(recipe.drinks[0])
         })
     }
     if(e.target.classList.contains('add-to-fav')){
-        console.log('add to fav')
         if(e.target.classList.contains('favorite')){
             e.target.classList.remove('favorite')
             e.target.textContent = '+'
+            e.target.style.backgroundColor = 'rgb(48, 194, 194)'
             cocktaildb.removeFromDB(e.target.dataset.id)
         } else{
             e.target.classList.add('favorite')
-            e.target.textContent = '-'
+            e.target.textContent = `‒`;
+            e.target.style.backgroundColor = 'rgb(235, 105, 125)'
             const drinkBody = e.target.parentElement
             const drink = {
                 id: e.target.dataset.id,
                 name: drinkBody.querySelector('h2').textContent,
                 image: drinkBody.querySelector('img').src
             }
-            // console.log(drink)
             cocktaildb.saveToDB(drink)
 
         }
