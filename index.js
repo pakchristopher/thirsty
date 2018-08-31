@@ -76,11 +76,15 @@ class UI{
     }
     displayRecipe(recipe){
         document.getElementById('modal-recipe').style.display = 'block'
+        document.getElementById('modal-recipe').style.zIndex = '101'
         const modalTitle = document.querySelector('.modal__content-title')
         const modalIngredients = document.querySelector('.modal__content-ingredients')
         const modalDescription = document.querySelector('.modal__content-description')
+        const modalImg = document.querySelector('.modal__content-img')
+        console.log(recipe)
 
         modalTitle.textContent = recipe.strDrink
+        modalImg.src = recipe.strDrinkThumb
         modalIngredients.innerHTML = this.displayIngredients(recipe)
         modalDescription.textContent = recipe.strInstructions
     }
@@ -186,12 +190,14 @@ function eventListeners(){
     const form = document.querySelector('.wrap__form')
     const wrapResult = document.querySelector('.wrap__result')
     const searchCategory = document.getElementById('search-category')
+    const modal = document.getElementById('modal-recipe')
 
     document.addEventListener('DOMContentLoaded', docReady)
 
     if(form) form.addEventListener('submit', getDrinks) // if this form is present in current active html page
     if(wrapResult) wrapResult.addEventListener('click', resultDelegation)
     if(searchCategory) searchCategory.addEventListener('change', getDrinks)
+    if(modal) modal.addEventListener('click', modalEvents)
 }
 eventListeners()
 
@@ -282,5 +288,13 @@ function resultDelegation(e){
             cocktaildb.saveToDB(drink)
 
         }
+    }
+}
+function modalEvents(e){
+    e.preventDefault();
+    if(e.target.classList.contains('close-x')){
+        const modal = document.getElementById('modal-recipe');
+        modal.style.display = 'none';
+        modal.style.zIndex = '-101';
     }
 }
