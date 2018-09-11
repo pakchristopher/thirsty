@@ -66,7 +66,7 @@ class UI{
                 <div class="query-result">
                     <button class="add-to-fav" data-id="${drink.idDrink}">+</button>
                     <h2 class="query-result__name">${drink.strDrink}</h2>
-                    <img src="${drink.strDrinkThumb}" alt="${drink.strDrink}">
+                    <img class="query-result__img" src="${drink.strDrinkThumb}" alt="${drink.strDrink}">
                     <a class="btn get-recipe" href="javascript:void(0)" data-toggle="modal" data-id="${drink.idDrink}" data-target="#modal-recipe">Get Recipe</a>
                 </div>
             `;
